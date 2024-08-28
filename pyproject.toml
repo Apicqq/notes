@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "notes"
+version = "0.1.0"
+description = ""
+authors = ["Nikita Smykov <132088678+Apicqq@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.112.2"
+alembic = "^1.13.2"
+fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
