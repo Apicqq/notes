@@ -16,13 +16,9 @@ class Settings(BaseSettings):
     sqlite_db_url: str = "sqlite+aiosqlite:///./Notes.db"
     secret: str = "VERY_SECRET_SECRET"
     ya_spellcheck_address: str = (
-        "https://speller.yandex.net/services/"
-        "spellservice.json/checkText"
+        "https://speller.yandex.net/services/" "spellservice.json/checkText"
     )
-    model_config: dict = ConfigDict(
-        env_file = ".env",
-        extra = "ignore"
-    )
+    model_config: dict = ConfigDict(env_file=".env", extra="ignore")
 
 
 settings = Settings()

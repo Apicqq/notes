@@ -18,8 +18,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self.model = model
 
     async def get(
-            self,
-            obj_id: int, session: AsyncSession
+        self, obj_id: int, session: AsyncSession
     ) -> Optional[ModelType]:
         obj = await session.execute(
             select(self.model).where(self.model.id == obj_id)
@@ -27,10 +26,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return obj.scalars().first()
 
     async def create(
-            self,
-            obj_in: CreateSchemaType,
-            user: User,
-            session: AsyncSession
+        self, obj_in: CreateSchemaType, user: User, session: AsyncSession
     ) -> ModelType:
         obj_in_data = obj_in.model_dump()
         obj_in_data["author_id"] = user.id

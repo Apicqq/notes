@@ -16,16 +16,13 @@ router = APIRouter()
     response_model=list[NoteGet],
 )
 async def get_notes_list(
-        session: AsyncSession = Depends(get_async_session),
-        user: User = Depends(current_user)
+    session: AsyncSession = Depends(get_async_session),
+    user: User = Depends(current_user),
 ) -> list[Note]:
     """
     Вывести список заметок пользователя.
     """
-    notes = await notes_crud.get_notes_list_by_user(
-        user=user,
-        session=session
-    )
+    notes = await notes_crud.get_notes_list_by_user(user=user, session=session)
     return notes
 
 
@@ -33,23 +30,28 @@ async def get_notes_list(
     "/",
     response_model=NoteCreate,
     responses={
-        400: {"description": "Spelling check failed",
-              "content": {
-                  "application/json": {
-                      "example": {
-                          "message": Err.SPELLCHECK_FAILED,
-                          "errors": [{"word1": "word", "suggestions":
-                              ["suggestion1", "suggestion2"]}]
-                      }
-                  }
-              }
-              }
-    }
+        400: {
+            "description": "Spelling check failed",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": Err.SPELLCHECK_FAILED,
+                        "errors": [
+                            {
+                                "word1": "word",
+                                "suggestions": ["suggestion1", "suggestion2"],
+                            }
+                        ],
+                    }
+                }
+            },
+        }
+    },
 )
 async def create_note(
-        note: NoteCreate,
-        session: AsyncSession = Depends(get_async_session),
-        user: User = Depends(current_user)
+    note: NoteCreate,
+    session: AsyncSession = Depends(get_async_session),
+    user: User = Depends(current_user),
 ) -> Note:
     """
     Создать новую заметку.

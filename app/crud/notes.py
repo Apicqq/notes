@@ -7,14 +7,9 @@ from app.models.note import Note
 from app.schemas.notes import NoteCreate, NoteUpdate
 
 
-class CRUDNotes(
-    CRUDBase[Note, NoteCreate, NoteUpdate]
-):
+class CRUDNotes(CRUDBase[Note, NoteCreate, NoteUpdate]):
     @staticmethod
-    async def get_notes_list_by_user(
-            user: User,
-            session: AsyncSession
-    ):
+    async def get_notes_list_by_user(user: User, session: AsyncSession):
         """
         Получить список заметок пользователя.
         """

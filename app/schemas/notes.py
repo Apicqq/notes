@@ -9,11 +9,7 @@ class NoteBase(BaseModel):
     Базовая схема для заметки.
     """
 
-    title: str = Field(
-        None,
-        title="Заголовок заметки",
-        max_length=100
-    )
+    title: str = Field(None, title="Заголовок заметки", max_length=100)
     content: str = Field(
         None,
         title="Содержание заметки",
