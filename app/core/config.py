@@ -1,5 +1,6 @@
 import os
 
+from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 
 
@@ -18,10 +19,10 @@ class Settings(BaseSettings):
         "https://speller.yandex.net/services/"
         "spellservice.json/checkText"
     )
-
-    class Config:
-        env_file = ".env"
+    model_config: dict = ConfigDict(
+        env_file = ".env",
         extra = "ignore"
+    )
 
 
 settings = Settings()
