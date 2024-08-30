@@ -1,7 +1,8 @@
 from sqlalchemy import MetaData
+from sqlalchemy.ext.asyncio import (
+    AsyncSession, create_async_engine, async_sessionmaker)
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import declarative_base, declared_attr, sessionmaker
+from sqlalchemy.orm import declarative_base, declared_attr
 
 from app.core.config import settings
 
@@ -27,8 +28,8 @@ Base = declarative_base(
         }
     ),
 )
-engine = create_async_engine(settings.database_url)
-AsyncSessionLocal = sessionmaker(engine)
+engine = create_async_engine(settings.postgres_db_url)
+AsyncSessionLocal = async_sessionmaker(engine)
 
 
 async def get_async_session() -> AsyncSession:
