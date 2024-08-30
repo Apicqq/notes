@@ -5,7 +5,7 @@ import requests
 from app.core.config import settings
 
 
-def check_spelling(text: str, lang: str = "ru, en") -> list | bool:
+def check_spelling(text: str, lang: str = "ru, en") -> list[dict[str, str]] | bool:
     errors = list()
     try:
         payload = dict(

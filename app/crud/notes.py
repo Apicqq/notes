@@ -15,6 +15,9 @@ class CRUDNotes(
             user: User,
             session: AsyncSession
     ):
+        """
+        Получить список заметок пользователя.
+        """
         notes = await session.execute(
             select(Note).where(Note.author_id == user.id)
         )

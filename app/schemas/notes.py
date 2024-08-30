@@ -5,6 +5,10 @@ from app.services.spell_checker import check_spelling
 
 
 class NoteBase(BaseModel):
+    """
+    Базовая схема для заметки.
+    """
+
     title: str = Field(
         None,
         title="Заголовок заметки",
@@ -18,6 +22,10 @@ class NoteBase(BaseModel):
 
 
 class NoteCreate(NoteBase):
+    """
+    Схема для создания заметок. Включает в себя валидацию правописания.
+    """
+
     @field_validator("content")
     @classmethod
     def spellcheck_note_content(cls, value: str) -> str:

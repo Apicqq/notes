@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.constants import ErrConstants as Err
 from app.core.db import get_async_session
 from app.core.user import current_user
 from app.crud.notes import notes_crud
@@ -36,8 +37,9 @@ async def get_notes_list(
               "content": {
                   "application/json": {
                       "example": {
-                          "message": "Текст заметки не прошёл орфографическую проверку. Пожалуйста, исправьте ошибки в следующих словах:",
-                          "errors": [{"word1": "word", "suggestions": ["suggestion1", "suggestion2"]}]
+                          "message": Err.SPELLCHECK_FAILED,
+                          "errors": [{"word1": "word", "suggestions":
+                              ["suggestion1", "suggestion2"]}]
                       }
                   }
               }

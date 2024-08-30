@@ -3,6 +3,7 @@ from http import HTTPStatus
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from app.core.constants import ErrConstants as Err
 from app.api.routers import main_router
 from app.core.exceptions import SpellingCheckException
 
@@ -19,8 +20,7 @@ async def spellcheck_exception_handler(
     return JSONResponse(
         status_code=HTTPStatus.BAD_REQUEST,
         content=dict(
-            message="Текст заметки не прошёл орфографическую проверку."
-                    " Пожалуйста, исправьте ошибки в следующих словах:",
+            message=Err.SPELLCHECK_FAILED,
             errors=str(exc),
             )
     )
