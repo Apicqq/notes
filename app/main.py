@@ -24,3 +24,8 @@ async def spellcheck_exception_handler(
             errors=str(exc),
             )
     )
+
+
+@app.get("/")
+async def root() -> dict:
+    return {"message": "please refer to /redoc or /swagger for documentation"}
