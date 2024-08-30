@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 import requests
+from requests.exceptions import ConnectionError
 
 from app.core.config import settings
 
@@ -20,5 +21,6 @@ def check_spelling(
                     )
                 return errors
         raise ConnectionError
-    except (ConnectionError, TimeoutError) as e:
-        return False
+    except (ConnectionError, TimeoutError):
+        return False  # в случае, если сервис яндекса недоступен, пропускаем
+    # валидацию
