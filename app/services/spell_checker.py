@@ -1,12 +1,11 @@
 from http import HTTPStatus
-from typing import Union
 
 import requests
 
 from app.core.config import settings
 
 
-def check_spelling(text: str, lang: str = "ru") -> Union[list, bool]:
+def check_spelling(text: str, lang: str = "ru, en") -> list | bool:
     errors = list()
     try:
         payload = dict(
@@ -27,8 +26,6 @@ def check_spelling(text: str, lang: str = "ru") -> Union[list, bool]:
                         )
                     )
                 return errors
-            else:
-                return True
         raise ConnectionError
     except (ConnectionError, TimeoutError) as e:
-        print(f"Error in check_note_spelling({text}). {e}")
+        return False
