@@ -32,7 +32,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             user: User,
             session: AsyncSession
     ) -> ModelType:
-        obj_in_data = obj_in.dict()
+        obj_in_data = obj_in.model_dump()
         obj_in_data["author_id"] = user.id
         db_obj = self.model(**obj_in_data)
         session.add(db_obj)
