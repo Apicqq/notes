@@ -12,6 +12,7 @@ class Settings(BaseSettings):
         f":{os.getenv('DB_PORT')}/"
         f"{os.getenv('POSTGRES_DB')}"
     )
+    sqlite_db_url: str = "sqlite+aiosqlite:///./Notes.db"
     secret: str = "VERY_SECRET_SECRET"
     ya_spellcheck_address: str = (
         "https://speller.yandex.net/services/"

@@ -1,3 +1,6 @@
+import os
+
+from dotenv import load_dotenv
 from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import (
     AsyncSession, create_async_engine, async_sessionmaker)
@@ -5,6 +8,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.orm import declarative_base, declared_attr
 
 from app.core.config import settings
+
+load_dotenv()
 
 
 class PreBase:
@@ -28,7 +33,10 @@ Base = declarative_base(
         }
     ),
 )
-engine = create_async_engine(settings.postgres_db_url)
+if os.getenv("TESTING"):
+    engine = create_async_engine(settings.sqlite_db_url)
+else:
+    engine = create_async_engine(settings.postgres_db_url)
 AsyncSessionLocal = async_sessionmaker(engine)
 
 
