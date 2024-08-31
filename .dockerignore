@@ -4,3 +4,6 @@ venv
 .idea
 .env
 *.db
+*.sqlite
+*.sqlite3
+requirements.txt
