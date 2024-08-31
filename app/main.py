@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from app.core.constants import ErrConstants as Err
 from app.api.routers import main_router
 from app.core.exceptions import SpellingCheckException
+from app.core.init_db import create_first_superuser
 
 app = FastAPI(
     docs_url="/swagger",
@@ -30,3 +31,8 @@ async def spellcheck_exception_handler(
 @app.get("/")
 async def root() -> dict:
     return {"message": "please refer to /redoc or /swagger for documentation"}
+
+
+@app.on_event("startup")
+async def startup() -> None:
+    await create_first_superuser()
