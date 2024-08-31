@@ -36,7 +36,7 @@ Base = declarative_base(
         }
     ),
 )
-if os.getenv("TESTING"):
+if os.getenv("TESTING") == "True":
     engine = create_async_engine(settings.sqlite_db_url)
 else:
     engine = create_async_engine(settings.postgres_db_url)

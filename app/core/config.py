@@ -1,9 +1,13 @@
 import os
+from typing import Optional
 
+from pydantic import EmailStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    first_superuser_email: Optional[EmailStr] = None
+    first_superuser_password: Optional[str] = None
     postgres_db_url: str = (
         f"postgresql+asyncpg://"
         f"{os.getenv('POSTGRES_USER')}:"
