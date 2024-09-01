@@ -27,7 +27,7 @@ app.include_router(main_router)
 
 @app.exception_handler(SpellingCheckException)
 async def spellcheck_exception_handler(
-        request: Request, exc: SpellingCheckException
+    request: Request, exc: SpellingCheckException
 ) -> JSONResponse:
     return JSONResponse(
         status_code=HTTPStatus.BAD_REQUEST,
