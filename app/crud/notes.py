@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi_pagination.ext.sqlalchemy import paginate
 
 from app.core.base import User
 from app.crud.base import CRUDBase
@@ -13,10 +14,9 @@ class CRUDNotes(CRUDBase[Note, NoteCreate, NoteUpdate]):
         """
         Получить список заметок пользователя.
         """
-        notes = await session.execute(
-            select(Note).where(Note.author_id == user.id)
+        return await paginate(
+            session, select(Note).where(Note.author_id == user.id)
         )
-        return notes.scalars().all()
 
 
 notes_crud = CRUDNotes(Note)

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from fastapi_pagination import LimitOffsetPage, Page
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.constants import ErrConstants as Err
@@ -13,7 +14,11 @@ router = APIRouter()
 
 @router.get(
     "/",
-    response_model=list[NoteGet],
+    response_model=Page[NoteGet],
+)
+@router.get(
+    "/limit-offset",
+    response_model=LimitOffsetPage[NoteGet],
 )
 async def get_notes_list(
     session: AsyncSession = Depends(get_async_session),

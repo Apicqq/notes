@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi_pagination import add_pagination
 
 from app.api.routers import main_router
 from app.core.constants import ErrConstants as Err
@@ -20,7 +21,7 @@ app = FastAPI(
     docs_url="/swagger",
     lifespan=lifespan,
 )
-
+add_pagination(app)
 app.include_router(main_router)
 
 

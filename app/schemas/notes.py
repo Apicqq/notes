@@ -32,7 +32,7 @@ class NoteCreate(NoteBase):
 
 
 class NoteGet(NoteBase):
-    pass
+    id: int
 
 
 class NoteUpdate(NoteBase):
