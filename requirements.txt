@@ -339,6 +339,9 @@ exceptiongroup==1.2.2 ; python_version >= "3.10" and python_version < "3.11" \
 faker==12.0.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:1dc2811f20e163892fefe7006f2ce00778f8099a40aee265bfa60a13400de63d \
     --hash=sha256:aa7103805ae793277abbb85da9f6f05e76a1a295a9384a8e17c2fba2b3a690cb
+fastapi-pagination==0.12.26 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:40b18c312ed5c3a631106c2f19bb4b8d71b1773c1d83f6ae7555071b13822845 \
+    --hash=sha256:b59711d162e04b9b67efbdbba388c29bad0aac69da93fefaf0a85e2bb090853d
 fastapi-users-db-sqlalchemy==6.0.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:d1050ec31eb75e8c4fa9abafa4addaf0baf5c97afeea2f0f910ea55e2451fcad \
     --hash=sha256:f0ef9fe3250453712d25c13170700c80fa205867ce7add7ef391c384ec27cbe1
