@@ -1,16 +1,16 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from fastapi_pagination import LimitOffsetPage, Page
-from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.api import UserDependency, SessionDependency
 from app.core.constants import ErrConstants as Err
-from app.core.db import get_async_session
-from app.core.user import current_user
 from app.crud.notes import notes_crud
-from app.models import Note, User
+from app.models import Note
 from app.schemas.notes import NoteCreate, NoteGet
 from app.schemas.spelling import SpellingCheckFailedResponse
 
 router = APIRouter()
+
+
 
 
 @router.get(
@@ -22,8 +22,8 @@ router = APIRouter()
     response_model=LimitOffsetPage[NoteGet],
 )
 async def get_notes_list(
-    session: AsyncSession = Depends(get_async_session),
-    user: User = Depends(current_user),
+        session: SessionDependency,
+        user: UserDependency,
 ) -> list[Note]:
     """
     Вывести список заметок пользователя.
@@ -43,9 +43,9 @@ async def get_notes_list(
     },
 )
 async def create_note(
-    note: NoteCreate,
-    session: AsyncSession = Depends(get_async_session),
-    user: User = Depends(current_user),
+        note: NoteCreate,
+        session: SessionDependency,
+        user: UserDependency,
 ) -> Note:
     """
     Создать новую заметку.
