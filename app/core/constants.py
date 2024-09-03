@@ -7,3 +7,4 @@ class ErrConstants:
         "Текст заметки не прошёл орфографическую проверку."
         " Пожалуйста, исправьте ошибки в следующих словах:"
     )
+    SPELLCHECK_FAILED_SHORT = "Spelling check failed"

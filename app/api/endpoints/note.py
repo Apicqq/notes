@@ -8,6 +8,7 @@ from app.core.user import current_user
 from app.crud.notes import notes_crud
 from app.models import Note, User
 from app.schemas.notes import NoteCreate, NoteGet
+from app.schemas.spelling import SpellingCheckFailedResponse
 
 router = APIRouter()
 
@@ -35,22 +36,10 @@ async def get_notes_list(
     "/",
     response_model=NoteCreate,
     responses={
-        400: {
-            "description": "Spelling check failed",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "message": Err.SPELLCHECK_FAILED,
-                        "errors": [
-                            {
-                                "word1": "word",
-                                "suggestions": ["suggestion1", "suggestion2"],
-                            }
-                        ],
-                    }
-                }
-            },
-        }
+        400: dict(
+            description=Err.SPELLCHECK_FAILED_SHORT,
+            model=SpellingCheckFailedResponse,
+        )
     },
 )
 async def create_note(
