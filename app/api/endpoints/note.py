@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 from fastapi_pagination import LimitOffsetPage, Page
 
 from app.api import UserDependency, SessionDependency
@@ -11,8 +11,6 @@ from app.schemas.spelling import SpellingCheckFailedResponse
 router = APIRouter()
 
 
-
-
 @router.get(
     "/",
     response_model=Page[NoteGet],
@@ -22,8 +20,8 @@ router = APIRouter()
     response_model=LimitOffsetPage[NoteGet],
 )
 async def get_notes_list(
-        session: SessionDependency,
-        user: UserDependency,
+    session: SessionDependency,
+    user: UserDependency,
 ) -> list[Note]:
     """
     Вывести список заметок пользователя.
@@ -36,16 +34,16 @@ async def get_notes_list(
     "/",
     response_model=NoteCreate,
     responses={
-        400: dict(
+        status.HTTP_400_BAD_REQUEST: dict(
             description=Err.SPELLCHECK_FAILED_SHORT,
             model=SpellingCheckFailedResponse,
         )
     },
 )
 async def create_note(
-        note: NoteCreate,
-        session: SessionDependency,
-        user: UserDependency,
+    note: NoteCreate,
+    session: SessionDependency,
+    user: UserDependency,
 ) -> Note:
     """
     Создать новую заметку.
