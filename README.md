@@ -68,7 +68,7 @@ cd notes
 touch .env
 ```
 
-И наполнить его переменными по примеру из файла `.env.example`
+И наполните его переменными по примеру из файла `.env.example`
 <br>
 <sup>Переменная TESTING используется для выбора действующей базы данных.<br> При TESTING=True будет использована база данных SQLite, при TESTING=False — Postgres.</sup>
 <br>
